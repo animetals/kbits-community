@@ -11,6 +11,8 @@ Use Docker Compose or a container manager that supports Linux containers. The pu
 | Persistent storage | A folder on the host mounted at `/data/midi` |
 | Restart policy | `unless-stopped` |
 
+Port **5248** spells **KBIT** on a phone keypad: K = 5, B = 2, I = 4, T = 8.
+
 Choose a host folder for the library and make sure the container can write to it. Keep this folder when recreating or upgrading the container.
 
 ## Docker Compose
