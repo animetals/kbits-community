@@ -15,7 +15,7 @@ This checklist covers the first public Community release from the accepted modul
 
 1. Destination confirmed: `animetals/kbits-community`; account connection verified. Confirm public repository/package visibility and initial release version before publication.
 2. Use a fresh initial commit, as selected by the owner. Preserve the original development repository separately; publish only the reviewed Community source snapshot.
-3. Image references now target `ghcr.io/animetals/kbits-community:latest`. The container workflow derives both owner and image name from the destination repository. Verify the image exists and can be pulled before migrating an installation.
+3. Image references target `ghcr.io/animetals/kbits-community:latest`. The container workflow derives both owner and image name from the destination repository. Verify the image exists and can be pulled before migrating an installation.
 4. Agree on the publishing branch and triggers. The current workflow publishes on pushes to `main`, three named experimental branches, version tags, and manual dispatch. Version tags currently publish `latest` and a SHA tag, not a version-named image; settle version tagging before the first release.
 5. Configure repository checks and a private security reporting channel; document the verified reporting route in the contribution guide.
 6. Review the final source and notices, approve the destination and publication, then push only the intended branch/history. Preserve the old remote and installation until migration is verified.
@@ -31,4 +31,4 @@ This checklist covers the first public Community release from the accepted modul
 
 Kbits Community provides self-hosted MIDI playback with 8-, 17-, 21-, and 34-key kalimba layouts, per-layout tuning, Falling Blocks and Music Staff views, local libraries and playlists, practice loops and speed control, multiple themes and sound banks, and printable scores/PDF output. It requires no cloud account. Game scoring remains future work.
 
-The browser must be able to reach its local server or NAS for server-stored songs. Song playback with the network disabled did not pass the phone test and remains deferred. Fully disconnected reload/playback is not a release promise. Browser-only libraries have no complete in-app backup/restore workflow; preserve original MIDI files separately.
+The browser must be able to reach its local server for server-stored songs. Song playback with the network disabled did not pass the phone test and remains deferred. Fully disconnected reload/playback is not a release promise. Browser-only libraries have no complete in-app backup/restore workflow; preserve original MIDI files separately.

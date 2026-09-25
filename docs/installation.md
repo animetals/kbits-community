@@ -2,7 +2,7 @@
 
 [Home](../README.md) · [User guide](user-guide.md) · [Data and troubleshooting](data-and-troubleshooting.md)
 
-Kbits runs a small local server. Open its address in a browser to use the player. No account or external database is needed for playback. Installation and downloading updates require access to the source or container image; the project is still in private pre-release development.
+Run Kbits with the Windows launcher or in a container, then open its address in a browser. No account or external database is needed for playback. Installation and downloading updates require access to the source or container image.
 
 ## Docker Compose
 
@@ -18,7 +18,7 @@ docker compose up -d
 
 Open `http://localhost:5248` on that computer. On another device on the same network, use `http://YOUR_SERVER_IP:5248`. Keep the server running while using Kbits. The image build targets AMD64 and ARM64.
 
-The supplied configuration targets `ghcr.io/animetals/kbits-community:latest`. This new image is awaiting first publication and verification; existing installations should keep their current image until migration is announced. A private image requires registry access. An integration or experimental image can differ from `latest`; use the exact image tag supplied for your test installation. See [Synology instructions](../SYNOLOGY.md) for NAS configuration.
+The supplied configuration uses the public image `ghcr.io/animetals/kbits-community:latest`; no registry login is required. See the [container guide](../CONTAINERS.md) for port mappings, persistent storage, container-manager settings, and updates.
 
 ## Run from source on a computer
 

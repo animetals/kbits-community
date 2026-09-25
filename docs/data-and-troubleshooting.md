@@ -15,7 +15,7 @@ Phones using the same server share the server library. Their preferences remain 
 
 The server library and browser fallback are separate stores. When the server catalog is unavailable, Kbits can show the browser library; it does not contain an automatic copy of the server's songs. Failed server uploads may be stored in the browser instead. Libraries are not automatically merged or synchronized when the server returns. Requests to change an existing server song still target the server.
 
-Local operation means no Internet dependency during normal use. It does not guarantee that a page or a NAS library remains available after disconnecting from the server. Opening a `file:` page does not support managed uploads.
+Local operation means no Internet dependency during normal use. It does not guarantee that a page or a server library remains available after disconnecting from the server. Opening a `file:` page does not support managed uploads.
 
 ## Back up and restore
 
