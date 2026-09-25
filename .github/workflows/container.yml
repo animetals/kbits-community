@@ -1,18 +1,28 @@
-name: Build Kbits container
+name: Publish testing container
 
 on:
   push:
-    branches: [main, experiment/music-staff, experiment/print-scores, integration/community-modularization]
-    tags: ["v*"]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
   contents: read
-  packages: write
+
+concurrency:
+  group: testing-container
+  cancel-in-progress: false
 
 jobs:
+  validate:
+    uses: ./.github/workflows/quality.yml
+
   container:
+    needs: validate
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - uses: actions/checkout@v4
       - id: image
@@ -29,7 +39,7 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ steps.image.outputs.name }}:${{ github.ref == 'refs/heads/experiment/music-staff' && 'staff-test' || github.ref == 'refs/heads/experiment/print-scores' && 'print-test' || github.ref == 'refs/heads/integration/community-modularization' && 'modularization-test' || 'latest' }}
+            ${{ steps.image.outputs.name }}:testing
             ${{ steps.image.outputs.name }}:sha-${{ github.sha }}
           labels: |
             org.opencontainers.image.title=Kbits Kalimba Player

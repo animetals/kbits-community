@@ -1,0 +1,59 @@
+name: Promote tested image to stable
+
+on:
+  workflow_dispatch:
+    inputs:
+      tested_commit:
+        description: Full commit SHA of the manually accepted testing image
+        required: true
+        type: string
+      version:
+        description: New release version, for example 0.1.0 (without v)
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+  packages: write
+
+concurrency:
+  group: stable-container
+  cancel-in-progress: false
+
+jobs:
+  promote:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    env:
+      TESTED_COMMIT: ${{ inputs.tested_commit }}
+      VERSION: ${{ inputs.version }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Verify release inputs and successful testing build
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$TESTED_COMMIT" =~ ^[0-9a-f]{40}$ ]] || { echo 'Full lowercase commit SHA required'; exit 1; }
+          [[ "$VERSION" =~ ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]] || { echo 'Version must be MAJOR.MINOR.PATCH'; exit 1; }
+          success=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/container.yml/runs?head_sha=$TESTED_COMMIT&status=success" --jq '.workflow_runs | any(.head_branch == "main")')
+          [[ "$success" == true ]] || { echo 'No successful testing workflow for this commit'; exit 1; }
+          echo "IMAGE=ghcr.io/${GITHUB_REPOSITORY,,}" >> "$GITHUB_ENV"
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/setup-buildx-action@v3
+      - name: Promote existing image without rebuilding
+        shell: bash
+        run: |
+          set -euo pipefail
+          if docker buildx imagetools inspect "$IMAGE:$VERSION" >/dev/null 2>&1; then
+            echo 'Version already exists; choose a new version rather than overwriting it'
+            exit 1
+          fi
+          digest=$(docker buildx imagetools inspect "$IMAGE:sha-$TESTED_COMMIT" --format '{{json .Manifest}}' | jq -r '.digest')
+          [[ "$digest" =~ ^sha256:[0-9a-f]{64}$ ]] || { echo 'Could not resolve tested image digest'; exit 1; }
+          docker buildx imagetools create --tag "$IMAGE:$VERSION" --tag "$IMAGE:stable" --tag "$IMAGE:latest" "$IMAGE@$digest"
+          echo "Promoted $IMAGE@$digest to $VERSION, stable and latest" >> "$GITHUB_STEP_SUMMARY"

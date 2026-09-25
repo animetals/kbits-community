@@ -1,8 +1,9 @@
 name: Validate Kbits Community
 
 on:
+  workflow_call:
   push:
-    branches: [main, "feature/**", "fix/**", "chore/**", "experiment/**", "integration/**"]
+    branches: ["feature/**", "fix/**", "chore/**", "experiment/**", "integration/**"]
   pull_request:
 
 permissions:
@@ -41,6 +42,7 @@ jobs:
           node --check js/features/playfield-renderer.js
           node --check js/midi-parser.js
           node --check js/staff-view.js
+          node --check js/print-view.js
           node --check js/app.js
           node --check server.js
           node --check tests/browser/serve.js

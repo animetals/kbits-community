@@ -38,6 +38,22 @@ docker compose up -d
 
 Open `http://localhost:5248` on the container host, or `http://HOST-IP:5248` from another device on the same network. Replace `HOST-IP` with the container host's address. If port 5248 is already in use, change the host-side port and use that port in the browser address.
 
+## Stable and testing images
+
+`testing` contains changes from `main` after automated validation succeeds. Use it with a separate library on port 5249. `stable` and `latest` are reserved for manually accepted releases; numbered tags such as `0.1.0` identify a release. Commit-specific `sha-<commit>` tags identify testing builds.
+
+The first `stable` tag will be created after release acceptance. Until then, `latest` retains the existing published image and is no longer updated by ordinary pushes.
+
+To run the test instance, use [compose.testing.yaml](compose.testing.yaml):
+
+```sh
+docker compose -f compose.testing.yaml up -d
+```
+
+Open `http://HOST-IP:5249`. This configuration uses `./midi-testing`, separate from the normal `./midi` library. Never point both instances at the same library. Pull and recreate the test container when a new testing image is ready.
+
+After manual acceptance, maintainers run **Promote tested image to stable** in GitHub Actions with the accepted full commit SHA and a new version number. Promotion reuses the built image without rebuilding it; it updates the numbered tag, `stable`, and `latest`. It does not create a GitHub Release automatically.
+
 ## Library and backups
 
 Uploaded MIDI files are saved in the mounted host folder. MIDI files copied into that folder also appear in Song Library. Editing a song name changes its displayed metadata, not its filename. Deleting a song removes the shared MIDI file and its playlist memberships.

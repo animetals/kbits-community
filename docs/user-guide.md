@@ -40,7 +40,7 @@ MIDI pitches outside the selected model's tuned notes do not appear as falling n
 
 The sound selector offers the bundled Keylimba, FreePats, Moozica, and Vini banks. See [sound credits](../licenses/SOUNDFONTS.md) for their individual licenses. Theme changes the visual palette. Setup also controls tine labels, stickers, zoom, falling-note appearance, and the play view. These preferences belong to the current browser, not the shared library.
 
-The experimental staff view shows the song as scrolling notation. Tapping a staff note previews it; it does not seek playback. Its notation is a practice aid, not a full notation editor.
+The Music Staff view shows the song as scrolling notation. Tapping a staff note previews it; it does not seek playback. Its notation is a practice aid, not a full notation editor.
 
 ## Print an arrangement
 

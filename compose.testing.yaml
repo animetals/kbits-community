@@ -1,0 +1,8 @@
+services:
+  kbits-testing:
+    image: ghcr.io/animetals/kbits-community:testing
+    restart: unless-stopped
+    ports:
+      - "5249:80"
+    volumes:
+      - ./midi-testing:/data/midi

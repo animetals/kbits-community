@@ -47,6 +47,8 @@ The image supports AMD64 and ARM64.
 
 See the [container guide](CONTAINERS.md) for container-manager settings, persistent storage, and updates.
 
+To try upcoming changes with a separate test library, use the [testing image instructions](CONTAINERS.md#stable-and-testing-images).
+
 ## Start playing
 
 1. Open **Song Library** and choose **Upload MIDI**.

@@ -19,7 +19,7 @@ Security vulnerabilities and private data must not be posted in public issues. A
 
 ## Branches
 
-- `main`: accepted production work; publishes `ghcr.io/animetals/kbits-community:latest`.
+- `main`: development changes; publishes `ghcr.io/animetals/kbits-community:testing` after validation. Manually accepted images are promoted to numbered releases, `stable`, and `latest` using the release workflow described in [CONTAINERS.md](CONTAINERS.md).
 - `fix/<topic>`: isolated bug fixes.
 - `feature/<topic>`: product improvements intended for production.
 - `experiment/<topic>`: work requiring separate user testing and, when configured, a non-production container tag.
