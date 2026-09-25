@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Kbits · Kalimba Player</title>
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/library.css">
+  <link rel="stylesheet" href="css/tuning.css">
+  <link rel="stylesheet" href="css/themes.css">
+  <link rel="stylesheet" href="css/layouts.css">
+  <link rel="stylesheet" href="css/pixel-ui.css">
+  <link rel="stylesheet" href="css/theme-controls.css">
+  <link rel="stylesheet" href="css/side-panels.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="assets/freepats-kalimba.js"></script>
+  <script src="assets/moozica-kalimba.js"></script>
+  <script src="assets/vini-kalimba.js"></script>
+  <script src="assets/keylimba.js"></script>
+  <script src="js/core/music-core.js" defer></script>
+  <script src="js/core/library-core.js" defer></script>
+  <script src="js/core/playback-core.js" defer></script>
+  <script src="js/core/midi-validation-core.js" defer></script>
+  <script src="js/platform/library-repositories.js" defer></script>
+  <script src="js/platform/audio-engine.js" defer></script>
+  <script src="js/features/player-controller.js" defer></script>
+  <script src="js/features/transport-controller.js" defer></script>
+  <script src="js/features/kalimba-controller.js" defer></script>
+  <script src="js/features/theme-controller.js" defer></script>
+  <script src="js/features/tuning-controller.js" defer></script>
+  <script src="js/features/song-library-controller.js" defer></script>
+  <script src="js/features/library-controller.js" defer></script>
+  <script src="js/features/playlist-editor-controller.js" defer></script>
+  <script src="js/features/browse-controller.js" defer></script>
+  <script src="js/features/print-controller.js" defer></script>
+  <script src="js/features/song-editor-controller.js" defer></script>
+  <script src="js/features/navigation-controller.js" defer></script>
+  <script src="js/features/settings-controller.js" defer></script>
+  <script src="js/features/playfield-renderer.js" defer></script>
+  <script src="js/midi-parser.js" defer></script>
+  <script src="js/staff-view.js" defer></script>
+  <script src="js/print-view.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <main class="console">
+    <header id="top-menu" class="topbar">
+      <button id="menu-button" class="menu-button" type="button" aria-expanded="false" aria-controls="side-menu" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <div class="logo"><span>K</span><strong>BITS</strong><small>KALIMBA PLAYER</small></div>
+    </header>
+    <div class="top-panel-bar"><button id="toggle-top-menu" type="button" aria-expanded="true" aria-controls="top-menu"><span class="top-panel-arrow">▲</span><span class="top-panel-label">HIDE TOP BAR</span></button><button id="toggle-fullscreen" class="fullscreen-button" type="button" title="Enter full screen" aria-label="Enter full screen" aria-pressed="false">⛶</button></div>
+
+    <section id="stage" class="stage" aria-label="Kalimba note highway">
+      <canvas id="highway"></canvas>
+      <div id="tines" class="tines"></div>
+      <div id="empty-state" class="empty-state"><strong>INSERT MIDI</strong><span>Upload a kalimba song to begin</span></div>
+    </section>
+
+    <div class="player-progress-row"><div id="progress-shell" class="progress-shell"><input id="progress" class="progress" type="range" min="0" max="1000" value="0" aria-label="Song position"><div class="loop-progress-overlay" aria-hidden="true"><span class="loop-range-track"></span><span class="loop-progress-marker loop-progress-start"></span><span class="loop-progress-marker loop-progress-end"></span></div></div></div>
+    <section id="player-panel" class="transport" aria-label="MIDI player controls">
+      <input id="file-input" type="file" accept=".mid,.midi,audio/midi,audio/x-midi" hidden>
+      <button id="rewind" class="transport-button" title="Back 5 seconds">◀◀</button>
+      <button id="play" class="transport-button primary" title="Play or pause">▶</button>
+      <button id="stop" class="transport-button" type="button" title="Stop and return to the beginning" aria-label="Stop and return to 0:00">■</button>
+      <button id="forward" class="transport-button" title="Forward 5 seconds">▶▶</button>
+      <button id="loop-start" class="transport-button loop-marker" type="button" title="Set loop start marker" aria-label="Set loop start marker">{</button>
+      <button id="loop-toggle" class="transport-button loop-button" type="button" title="Enable or disable loop" aria-label="Enable loop" aria-pressed="false">↻</button>
+      <button id="loop-end" class="transport-button loop-marker" type="button" title="Set loop end marker" aria-label="Set loop end marker">}</button>
+      <div class="speed-control">
+        <button id="speed" class="transport-button speed-button" type="button" title="Choose playback speed" aria-label="Playback speed ×1" aria-expanded="false" aria-controls="speed-options">×1</button>
+        <div id="speed-options" class="speed-options" role="menu" hidden><button type="button" data-speed="0.5">×0.5</button><button type="button" data-speed="0.75">×0.75</button><button type="button" data-speed="1">×1</button><button type="button" data-speed="1.25">×1.25</button><button type="button" data-speed="1.5">×1.5</button><button type="button" data-speed="2">×2</button></div>
+      </div>
+      <div class="track-info"><strong id="track-name">NO SONG LOADED</strong><span id="time">00:00 / 00:00</span></div>
+    </section>
+  </main>
+
+  <aside id="side-menu" class="side-menu" aria-label="Application menu" aria-hidden="true">
+    <nav>
+      <button class="side-menu-item" data-open="library"><span class="side-menu-icon" aria-hidden="true">♫</span><span>SONGS</span></button>
+      <button class="side-menu-item" data-open="layouts"><span class="side-menu-icon" aria-hidden="true">▥</span><span>KALIMBA</span></button>
+      <button class="side-menu-item" data-open="themes"><span class="side-menu-icon" aria-hidden="true">🖌</span><span>THEME</span></button>
+      <button class="side-menu-item" data-open="settings"><span class="side-menu-icon" aria-hidden="true">⚙</span><span>SETUP</span></button>
+    </nav>
+  </aside>
+
+  <dialog id="library" class="pixel-dialog">
+    <button class="close" data-close>×</button>
+    <h2>SONG LIBRARY</h2>
+    <div class="dialog-body">
+      <div class="library-primary-actions">
+        <button id="dialog-upload" class="menu-card">⇧ UPLOAD MIDI</button>
+        <button id="browse-library" class="menu-card secondary">▦ BROWSE</button>
+      </div>
+      <button id="play-playlist" class="menu-card playlist-play-button" type="button">▶ PLAY ALL SONGS</button>
+      <div class="playlist-tools">
+        <label><span>PLAYLIST</span><select id="playlist-filter"><option value="all">ALL SONGS</option><option value="favorites">FAVORITES</option></select></label>
+        <button id="create-playlist" class="song-action playlist-add" type="button" title="Create playlist" aria-label="Create playlist">＋</button>
+        <button id="edit-playlist" class="song-action" type="button" title="Rename selected playlist" aria-label="Rename selected playlist" disabled>✎</button>
+        <button id="delete-playlist" class="song-action delete" type="button" title="Delete selected playlist" aria-label="Delete selected playlist" disabled>×</button>
+      </div>
+      <label class="library-search"><span id="library-search-scope">SEARCH ALL SONGS BY NAME, ARTIST, CATEGORY, TAG, DIFFICULTY OR LAYOUT</span><input id="song-search" type="search" placeholder="SEARCH ALL MIDI..." autocomplete="off"></label>
+      <div id="recent-files" class="song-list"><div class="library-empty">NO SAVED SONGS</div></div>
+      <div id="search-empty" class="library-empty search-empty" hidden>NO MATCHING SONGS</div>
+    </div>
+  </dialog>
+
+  <dialog id="song-details" class="pixel-dialog song-details-dialog">
+    <button class="close" data-song-editor-close>×</button>
+    <h2 id="song-editor-heading">SONG DETAILS</h2>
+    <form id="song-editor" class="dialog-body song-editor">
+      <input id="song-editor-id" type="hidden">
+      <label>NAME<input id="song-editor-name" maxlength="160" required autocomplete="off"></label>
+      <label>ARTIST<input id="song-editor-artist" maxlength="120" autocomplete="off"></label>
+      <label>CATEGORY<input id="song-editor-category" maxlength="80" list="song-categories" autocomplete="off"></label>
+      <datalist id="song-categories"><option value="Classical"><option value="Pop"><option value="Video Game"><option value="Film & TV"><option value="Original"><option value="Practice"><option value="Traditional"></datalist>
+      <label>TAGS <small>COMMA SEPARATED</small><input id="song-editor-tags" maxlength="300" placeholder="BEGINNER, C MAJOR, CHRISTMAS" autocomplete="off"></label>
+      <label>DIFFICULTY<select id="song-editor-difficulty"><option value="">NOT SET</option><option value="easy">EASY</option><option value="medium">MEDIUM</option><option value="hard">HARD</option><option value="impossible">IMPOSSIBLE</option></select></label>
+      <label>KALIMBA MODEL<select id="song-editor-layout"><option value="">NOT SET</option><option value="8">8 KEYS</option><option value="17">17 KEYS</option><option value="21">21 KEYS</option><option value="34">SEEDS PISCES · 34 KEYS</option></select></label>
+      <div id="song-file-details" class="song-file-details"></div>
+      <div id="song-playlist-panel" class="song-playlist-panel">
+        <div class="song-playlist-add"><select id="song-playlist-select"><option value="">SELECT PLAYLIST</option></select><button id="song-playlist-add" type="button" class="song-action playlist-add" aria-label="Add selected playlist">+</button></div>
+        <div id="song-playlist-memberships" class="song-playlist-memberships"></div>
+      </div>
+      <div class="song-editor-actions song-details-actions">
+        <button id="save-song-details" type="submit" class="menu-card">SAVE TO LIBRARY</button>
+        <button id="print-song" type="button" class="menu-card secondary">PRINT</button>
+        <button type="button" class="menu-card secondary" data-song-editor-close>CANCEL</button>
+      </div>
+    </form>
+  </dialog>
+
+  <section id="browse-view" class="browse-view" hidden aria-label="Browse MIDI library">
+    <header class="browse-header">
+      <button id="close-browse" class="menu-card secondary" type="button">← BACK TO SONGS</button>
+      <button id="browse-upload" class="menu-card" type="button">⇧ UPLOAD MIDI</button>
+      <div><h1>BROWSE MIDI</h1><p>Search, organize, and manage every offline song.</p></div>
+    </header>
+    <div class="browse-filters">
+      <label>NAME / ARTIST / TAG<input id="browse-search" type="search" placeholder="SEARCH ALL MIDI..." autocomplete="off"></label>
+      <label>CATEGORY<select id="browse-category"><option value="">ALL CATEGORIES</option></select></label>
+      <label>DIFFICULTY<select id="browse-difficulty"><option value="">ALL DIFFICULTIES</option><option value="easy">EASY</option><option value="medium">MEDIUM</option><option value="hard">HARD</option><option value="impossible">IMPOSSIBLE</option></select></label>
+      <label>KALIMBA MODEL<select id="browse-layout"><option value="">ALL MODELS</option><option value="8">8 KEYS</option><option value="17">17 KEYS</option><option value="21">21 KEYS</option><option value="34">SEEDS PISCES · 34 KEYS</option></select></label>
+      <div class="browse-playlist-filter">
+        <label>MANAGE PLAYLIST<select id="browse-playlist"><option value="">SELECT PLAYLIST</option></select></label>
+        <button id="browse-create-playlist" class="menu-card" type="button">NEW PLAYLIST</button>
+        <button id="browse-edit-playlist" class="menu-card secondary" type="button" disabled>EDIT PLAYLIST</button>
+      </div>
+    </div>
+    <div class="browse-table-wrap">
+      <table class="browse-table">
+        <thead><tr><th>NAME</th><th>ARTIST</th><th>CATEGORY</th><th>DIFFICULTY</th><th>KALIMBA MODEL</th><th>TAGS</th><th>PLAYLIST POSITION</th><th>ACTIONS</th></tr></thead>
+        <tbody id="browse-results"></tbody>
+      </table>
+      <div id="browse-empty" class="library-empty" hidden>NO MATCHING MIDI FILES</div>
+    </div>
+  </section>
+
+  <dialog id="print-options" class="pixel-dialog song-details-dialog">
+    <button class="close" data-print-close>×</button>
+    <h2>PRINT SONG</h2>
+    <form id="print-form" class="dialog-body song-editor">
+      <label>FORMAT<select id="print-format"><option value="numbers">KALIMBA NUMBERS</option><option value="notes">KALIMBA NOTE NAMES</option><option value="score">STANDARD SCORE</option></select></label>
+      <label>LAYOUT<select id="print-layout"><option value="8">8 KEYS</option><option value="17">17 KEYS</option><option value="21">21 KEYS</option><option value="34">SEEDS PISCES · 34 KEYS</option></select></label>
+      <label>PAPER<select id="print-paper"><option value="letter">LETTER</option><option value="a4">A4</option></select></label>
+      <label>ORIENTATION<select id="print-orientation"><option value="portrait">PORTRAIT</option><option value="landscape">LANDSCAPE</option></select></label>
+      <p>Only MIDI notes mapped to the currently selected layout and tuning will be printed.</p>
+      <div class="song-editor-actions">
+        <button type="button" class="menu-card secondary" data-print-close>CANCEL</button>
+        <button type="submit" class="menu-card">OPEN PRINT PREVIEW</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="playlist-details" class="pixel-dialog song-details-dialog">
+    <button class="close" data-playlist-editor-close>×</button>
+    <h2>EDIT PLAYLIST</h2>
+    <form id="playlist-editor" class="dialog-body song-editor">
+      <input id="playlist-editor-id" type="hidden">
+      <label>PLAYLIST NAME<input id="playlist-editor-name" maxlength="80" required autocomplete="off"></label>
+      <div class="song-editor-actions">
+        <button type="button" class="menu-card secondary" data-playlist-editor-close>CANCEL</button>
+        <button type="submit" class="menu-card">SAVE PLAYLIST</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="layouts" class="pixel-dialog"><button class="close" data-close>×</button><h2>SELECT A KALIMBA</h2><div class="dialog-body"><p>Choose a kalimba model. It determines the number and arrangement of tines, standard tuning, keyboard mapping, and falling-note lanes.</p><div class="layout-grid"><button class="layout-card" data-layout-count="8"><span class="key-count">8</span><strong>8 KEYS</strong><small>C4–C5</small></button><button class="layout-card" data-layout-count="17"><span class="key-count">17</span><strong>17 KEYS</strong><small>C4–E6</small></button><button class="layout-card" data-layout-count="21"><span class="key-count">21</span><strong>21 KEYS</strong><small>C4–B6</small></button><button class="layout-card" data-layout-count="34"><span class="key-count">34</span><strong>SEEDS PISCES</strong><small>34-KEY CHROMATIC · C</small></button></div></div></dialog>
+  <dialog id="themes" class="pixel-dialog theme-dialog"><button class="close" data-close>×</button><h2>THEME SELECT</h2><div class="dialog-body theme-grid"><button class="theme-card" data-theme-choice="snes"><span class="theme-swatch snes-swatch"></span><strong>16-BIT ARCADE</strong><small>CLASSIC KBITS</small></button><button class="theme-card" data-theme-choice="real"><span class="theme-swatch real-swatch"></span><strong>NIGHT KALIMBA</strong><small>DARK METAL</small></button><button class="theme-card" data-theme-choice="grove"><span class="theme-swatch grove-swatch"></span><strong>KALIMBA GROVE</strong><small>WARM NATURAL WOOD</small></button><button class="theme-card" data-theme-choice="chrono"><span class="theme-swatch chrono-swatch"></span><strong>TIME TRAVELER</strong><small>16-BIT TIME RPG</small></button><button class="theme-card" data-theme-choice="fantasy"><span class="theme-swatch fantasy-swatch"></span><strong>CRYSTAL FANTASY III</strong><small>16-BIT CRYSTAL RPG</small></button></div></dialog>
+  <dialog id="tuning" class="pixel-dialog tuning-dialog"><button class="close" data-close>×</button><h2>TINE TUNING</h2><div class="dialog-body"><button class="menu-card tuning-back-button" type="button" data-open="settings">← BACK TO SETUP</button><label class="tuning-item tuning-sound">SOUND<select id="sound"><option value="keylimba">KEYLIMBA SAMPLES</option><option value="freepats">FREEPATS · SOFTENED</option><option value="moozica">MOOZICA KALIMBA</option><option value="vini">VINI · CC0 REAL KALIMBA</option></select></label><p>Choose a standard preset or adjust each tine individually. Only exact MIDI matches appear in the note highway.</p><div class="tuning-presets" aria-label="Standard tuning presets"><button data-tuning-preset="0">C</button><button data-tuning-preset="1">C♯</button><button data-tuning-preset="-1">B</button><button data-tuning-preset="2">D</button></div><div id="tuning-grid" class="tuning-grid"></div><button id="reset-tuning" class="menu-card reset-tuning">RESET STANDARD C</button></div></dialog>
+  <dialog id="settings" class="pixel-dialog"><button class="close" data-close>×</button><h2>PLAYER SETUP</h2><div class="dialog-body settings-grid"><button class="menu-card settings-tuning-button" type="button" data-open="tuning">🔧 OPEN SOUND &amp; TUNING</button><label>TINE PLAY VOLUME <output id="tine-volume-value">80%</output><input id="tine-volume" type="range" min="0" max="100" value="80"></label><label>SONG / NOTE VOLUME <output id="song-volume-value">80%</output><input id="song-volume" type="range" min="0" max="100" value="80"></label><label>PLAY VIEW<select id="play-view"><option value="blocks">FALLING BLOCKS</option><option value="staff">MUSIC STAFF · EXPERIMENTAL</option></select></label><label>NOTE PREVIEW<select id="preview"><option value="2">2 SECONDS</option><option value="3" selected>3 SECONDS</option><option value="4">4 SECONDS</option><option value="5">5 SECONDS</option><option value="6">6 SECONDS</option><option value="7">7 SECONDS</option><option value="8">8 SECONDS</option><option value="9">9 SECONDS</option><option value="10">10 SECONDS</option></select></label><label id="falling-style-label">FALLING NOTE STYLE<select id="falling-style"><option value="block">COLOR BLOCK</option><option value="note">COLOR NOTE</option><option value="number">COLOR NUMBER</option></select></label><fieldset class="label-options"><legend>TINE LABELS</legend><label><input id="label-number" type="checkbox" checked> NUMBER</label><label><input id="label-note" type="checkbox" checked> NOTE NAME</label><label><input id="label-key" type="checkbox" checked> KEYBOARD KEY</label></fieldset><fieldset class="label-options touch-options"><legend>TOUCH CONTROL</legend><label><input id="tine-swipe" type="checkbox" checked> TINE SWIPE</label><small>Slide one finger across multiple tines</small></fieldset><fieldset class="label-options playback-options"><legend>MIDI PLAYBACK</legend><label><input id="mute-unmapped" type="checkbox"> MUTE NOTES OUTSIDE LAYOUT</label><small>Silence MIDI notes that do not match a tine</small></fieldset><label>TINE SIZE<select id="tine-zoom"><option value="0.6">60% · EXTRA SMALL</option><option value="0.75">75% · SMALL</option><option value="0.9">90%</option><option value="1" selected>100% · DEFAULT</option><option value="1.1">110%</option><option value="1.25">125% · LARGE</option><option value="1.4">140% · EXTRA LARGE</option></select></label></div></dialog>
+
+  <footer>KBITS SYSTEM · OFFLINE MODE · DROP MIDI ANYWHERE</footer>
+</body>
+</html>

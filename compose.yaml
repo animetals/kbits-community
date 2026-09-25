@@ -1,0 +1,9 @@
+services:
+  kbits:
+    image: ghcr.io/animetals/kbits-community:latest
+    container_name: kbits
+    restart: unless-stopped
+    ports:
+      - "5248:80"
+    volumes:
+      - ./midi:/data/midi

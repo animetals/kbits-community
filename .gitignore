@@ -1,0 +1,5 @@
+# A local library can contain private or copyrighted user files.
+midi/*
+!midi/README.md
+
+*.tmp

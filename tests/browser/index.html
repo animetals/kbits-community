@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kbits browser smoke checks</title>
+<style>
+  body { margin: 20px; font: 16px system-ui; background: #151823; color: #eee; }
+  button { padding: 10px 16px; font: inherit; }
+  li { margin: 8px 0; white-space: pre-wrap; }
+  .pass { color: #9be8ac; } .fail { color: #ff9d9d; }
+  #preview { overflow: auto; border: 1px solid #697086; margin-top: 20px; }
+  iframe { display: block; border: 0; background: #101018; }
+  pre { white-space: pre-wrap; }
+</style>
+<h1>Kbits browser smoke checks</h1>
+<p>Runs against a disposable copy of Kbits and a generated two-song library. Resize checks use real iframe viewports; they do not emulate touch hardware or device safe areas.</p>
+<button id="run" disabled>Run checks</button>
+<button id="download" disabled>Download report</button>
+<p id="status" role="status">Checking isolated fixture...</p>
+<ol id="results"></ol>
+<div id="preview"><iframe id="app" title="Kbits test viewport" width="1280" height="800" allow="autoplay"></iframe></div>
+<script src="smoke.js"></script>
+</html>

@@ -1,0 +1,19 @@
+.tuning-dialog { position:fixed; inset:76px 14px auto auto; width:min(440px,calc(100% - 28px)); max-height:calc(100vh - 178px); margin:0; z-index:30; box-shadow:8px 8px 0 #050511; }
+.tuning-dialog .dialog-body { max-height:calc(100vh - 240px); overflow:auto; }
+.tuning-sound { margin-top:16px; }
+.tuning-grid { display:block; padding:4px; margin:15px 0; }
+.tuning-row-group { margin:0 0 18px; padding:8px; border:2px solid #3b447c; background:#090b24; }
+.tuning-row-group h3 { position:sticky; left:0; margin:0 0 8px; color:#54e8ff; font-size:10px; letter-spacing:2px; }
+.tuning-row-items { display:grid; grid-template-columns:repeat(2,minmax(155px,1fr)); gap:8px; }
+.tuning-presets { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:14px 0; }
+.tuning-presets button { height:38px; border:2px solid #5964a1; border-radius:0; background:#22285c; color:white; box-shadow:3px 3px 0 #070713; font:bold 12px "Courier New",monospace; cursor:pointer; }
+.tuning-presets button:hover,.tuning-presets button.active { border-color:#ffe66d; background:#54e8ff; color:#09091b; }
+.tuning-item { display:flex; flex-direction:column; gap:5px; padding:8px; background:#0d102d; border:2px solid #5964a1; color:#54e8ff; font:bold 9px "Courier New",monospace; text-align:center; }
+.tuning-item strong { color:#ffe66d; font-size:12px; }
+.tuning-item select { height:28px; border:2px solid #5964a1; border-radius:0; background:#15183c; color:white; font:bold 10px "Courier New",monospace; }
+.tuning-item:hover,.tuning-item:focus-within { border-color:#ffe66d; background:#1a2050; }
+.tuning-preview { height:28px; border:2px solid #5964a1; border-radius:0; background:#2276b9; color:white; font:bold 9px "Courier New",monospace; cursor:pointer; }
+.tuning-preview:hover { background:#54e8ff; color:#09091b; }
+.tine.tuning-target { outline:4px solid #54e8ff; outline-offset:3px; filter:brightness(1.4) drop-shadow(0 0 9px #54e8ff); }
+.reset-tuning { margin:10px 0 0; background:#ff4f9a; }
+@media(max-width:700px){.tuning-row-items{grid-template-columns:1fr}.tuning-presets{grid-template-columns:repeat(2,1fr)}}

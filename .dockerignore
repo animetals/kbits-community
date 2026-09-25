@@ -1,0 +1,15 @@
+# Include only runtime files in the container build context.
+**
+!Dockerfile
+!index.html
+!server.js
+!LICENSE
+!THIRD_PARTY_NOTICES.md
+!assets/
+!assets/**
+!css/
+!css/**
+!js/
+!js/**
+!licenses/
+!licenses/**

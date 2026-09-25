@@ -1,0 +1,181 @@
+/* 16-bit Arcade: bright cartridge-era console controls. */
+body[data-theme="snes"] { --loop-start-color:#54e8ff;--loop-end-color:#ff4f9a; }
+body[data-theme="real"] { --loop-start-color:#9ec7d4;--loop-end-color:#c47b4e; }
+body[data-theme="grove"] { --loop-start-color:#79ad68;--loop-end-color:#c56545; }
+body[data-theme="chrono"] { --loop-start-color:#65e7ba;--loop-end-color:#ff8845; }
+body[data-theme="fantasy"] { --loop-start-color:#bff8ff;--loop-end-color:#a978ff; }
+
+body[data-theme="snes"] .transport-button {
+  border-color:#8c96d1;
+  background:linear-gradient(#303873 0 48%,#22285c 49%);
+  box-shadow:inset 3px 3px 0 rgba(255,255,255,.14),4px 4px 0 #070713;
+}
+body[data-theme="snes"] .transport-button.primary { background:linear-gradient(#ff72b3 0 48%,#c72e73 49%); }
+body[data-theme="snes"] .transport-button.upload { background:linear-gradient(#42baf2 0 48%,#16669f 49%); }
+
+/* Night Kalimba: restrained, traditional media-player controls. */
+body[data-theme="real"] .transport {
+  border-top-color:#777b7d;
+  background:#202224;
+  box-shadow:inset 0 1px #55595b;
+}
+body[data-theme="real"] .transport-button {
+  border:1px solid #727779;
+  border-radius:3px;
+  color:#eef0ef;
+  background:linear-gradient(#4a4e50,#303335);
+  box-shadow:inset 0 1px rgba(255,255,255,.18),0 1px 2px rgba(0,0,0,.55);
+  font-family:Arial,sans-serif;
+}
+body[data-theme="real"] .transport-button:hover { color:#fff;background:#565b5d;filter:none; }
+body[data-theme="real"] .transport-button.primary { border-radius:3px;background:linear-gradient(#606668,#3b3f41); }
+body[data-theme="real"] #stop { position:relative;font-size:0;line-height:1;padding:0; }
+body[data-theme="real"] #stop::before { content:"";position:absolute;left:50%;top:50%;width:13px;height:13px;background:currentColor;transform:translate(-50%,-50%); }
+body[data-theme="real"] .progress { accent-color:#b8bdbe; }
+body[data-theme="real"] .speed-options { border-color:#777b7d;background:#202224;box-shadow:0 2px 5px rgba(0,0,0,.6); }
+body[data-theme="real"] .speed-options button { border:1px solid #727779;background:#383c3e;color:#f3f4f4;box-shadow:none;font-family:Arial,sans-serif; }
+body[data-theme="real"] .player-panel-bar button { border:1px solid #727779;border-radius:3px;clip-path:none;background:linear-gradient(#4a4e50,#303335);color:#eef0ef;box-shadow:inset 0 1px rgba(255,255,255,.18),0 1px 2px rgba(0,0,0,.55);font-family:Arial,sans-serif; }
+body[data-theme="real"] .player-panel-bar .bar-play-button { background:linear-gradient(#606668,#3b3f41); }
+
+/* Kalimba Grove: traditional wood and brass media controls. */
+body[data-theme="grove"] .transport { border-top-color:#c99a4f;background:#2d1c12;box-shadow:inset 0 1px #6f482b; }
+body[data-theme="grove"] .transport-button { border:1px solid #b98a45;border-radius:3px;color:#fff0cc;background:linear-gradient(#765033,#4a2e1c);box-shadow:inset 0 1px rgba(255,231,180,.22),0 1px 2px rgba(0,0,0,.55);font-family:Arial,sans-serif; }
+body[data-theme="grove"] .transport-button:hover { color:#fff7df;background:#89603c;filter:none; }
+body[data-theme="grove"] .transport-button.primary { border-radius:3px;background:linear-gradient(#a17642,#654424); }
+body[data-theme="grove"] #stop { position:relative;font-size:0;line-height:1;padding:0; }
+body[data-theme="grove"] #stop::before { content:"";position:absolute;left:50%;top:50%;width:13px;height:13px;background:currentColor;transform:translate(-50%,-50%); }
+body[data-theme="grove"] .progress { accent-color:#d0a45a; }
+body[data-theme="grove"] .speed-options { border-color:#a8783e;background:#2d1c12;box-shadow:0 2px 5px rgba(0,0,0,.6); }
+body[data-theme="grove"] .speed-options button { border:1px solid #a8783e;background:#51331f;color:#fff0cc;box-shadow:none;font-family:Arial,sans-serif; }
+body[data-theme="grove"] .player-panel-bar button { border:1px solid #b98a45;border-radius:3px;clip-path:none;background:linear-gradient(#765033,#4a2e1c);color:#fff0cc;box-shadow:inset 0 1px rgba(255,231,180,.22),0 1px 2px rgba(0,0,0,.55);font-family:Arial,sans-serif; }
+body[data-theme="grove"] .player-panel-bar .bar-play-button { background:linear-gradient(#a17642,#654424); }
+
+/* Time Traveler: ornate teal-and-gold 16-bit adventure menu. */
+body[data-theme="chrono"] .transport {
+  border-top:4px solid #e8c568;
+  background:linear-gradient(#082b3a,#104b4e 55%,#082c37);
+  box-shadow:inset 0 3px #69e1bf,inset 0 -3px #03151f;
+}
+body[data-theme="chrono"] .transport-button {
+  position:relative;
+  border:3px solid #e7ca72;
+  color:#fff4b1;
+  background:linear-gradient(135deg,#1d776c,#0d4d50 55%,#082b3c);
+  clip-path:polygon(6px 0,calc(100% - 6px) 0,100% 6px,100% calc(100% - 6px),calc(100% - 6px) 100%,6px 100%,0 calc(100% - 6px),0 6px);
+  box-shadow:inset 0 0 0 2px #16312f,4px 4px 0 #020e16;
+  text-shadow:2px 2px #06191f;
+}
+body[data-theme="chrono"] .transport-button:hover { color:#14282a;background:linear-gradient(#fff3a0,#dba73f); }
+body[data-theme="chrono"] .transport-button.primary { color:#231b16;background:radial-gradient(circle,#fff2a0 0 24%,#ff9b42 27% 54%,#a93d31 57%); }
+body[data-theme="chrono"] .transport-button.upload { background:linear-gradient(135deg,#33ad91,#136777 55%,#123858); }
+body[data-theme="chrono"] .progress { accent-color:#ffd968; }
+body[data-theme="chrono"] .speed select { border:3px double #e7ca72;background:#082b3a;color:#fff4b1; }
+
+/* Crystal Fantasy III: blue crystal RPG command-window controls. */
+body[data-theme="fantasy"] .transport {
+  border-top:4px solid #d8f8ff;
+  background:linear-gradient(#071538,#102b71 52%,#071237);
+  box-shadow:inset 0 3px #738fff,inset 0 -3px #030719;
+}
+body[data-theme="fantasy"] .transport-button {
+  position:relative;
+  border:3px double #edfaff;
+  color:white;
+  background:linear-gradient(135deg,#4a68d7 0,#233f9f 42%,#172666 65%,#511c79 100%);
+  box-shadow:inset 2px 2px #8dbaff,inset -2px -2px #080f42,4px 4px 0 #030617;
+  text-shadow:2px 2px #050a34;
+}
+body[data-theme="fantasy"] .transport-button:hover { background:linear-gradient(135deg,#8eeaff,#536ddf 45%,#8b4cd0); }
+body[data-theme="fantasy"] .transport-button.primary {
+  color:#14205b;
+  background:linear-gradient(135deg,transparent 0 22%,#edffff 24% 38%,#82d9ff 40% 55%,#9a75ff 57% 74%,transparent 76%),linear-gradient(#394db3,#17266b);
+}
+body[data-theme="fantasy"] .transport-button.upload { background:linear-gradient(135deg,#55cfee,#334cc0 50%,#61247f); }
+body[data-theme="fantasy"] .progress { accent-color:#a978ff; }
+body[data-theme="fantasy"] .speed select { border:3px double #edfaff;background:#142b78;color:white; }
+
+body[data-theme="chrono"] .track-info strong,
+body[data-theme="fantasy"] .track-info strong { text-shadow:2px 2px #050719; }
+
+@media (prefers-reduced-motion:no-preference) {
+  body[data-theme="chrono"] .transport-button.primary:hover,
+  body[data-theme="fantasy"] .transport-button.primary:hover { transform:translateY(-2px); }
+}
+
+/* Extra-hard pixel pass for the two RPG themes. */
+body[data-theme="chrono"] .transport-button,
+body[data-theme="fantasy"] .transport-button {
+  border:4px solid #06152b;
+  border-radius:0;
+  clip-path:polygon(7px 0,calc(100% - 7px) 0,calc(100% - 7px) 3px,100% 3px,100% calc(100% - 9px),calc(100% - 3px) calc(100% - 9px),calc(100% - 3px) calc(100% - 3px),calc(100% - 9px) calc(100% - 3px),calc(100% - 9px) 100%,9px 100%,9px calc(100% - 3px),3px calc(100% - 3px),3px calc(100% - 9px),0 calc(100% - 9px),0 3px,7px 3px);
+  transition:none;
+  image-rendering:pixelated;
+}
+
+body[data-theme="chrono"] .transport-button {
+  color:#062f38;
+  background:linear-gradient(to bottom,#b9f56c 0 12%,#4bd396 13% 58%,#1b9a85 59% 72%,#12627a 73% 100%);
+  box-shadow:inset 0 0 0 3px #24786f,inset 0 4px #e7ff9d,0 5px 0 #234d67,0 9px 0 #06152b;
+  text-shadow:2px 2px #88e5a0;
+}
+body[data-theme="chrono"] .transport-button.upload {
+  background:linear-gradient(to bottom,#8cf7de 0 12%,#2ec7bd 13% 58%,#158ca3 59% 72%,#164d79 73%);
+}
+body[data-theme="chrono"] .transport-button.primary {
+  color:#4a1d12;
+  background:linear-gradient(to bottom,#fff07a 0 12%,#ffb33e 13% 58%,#e86a2e 59% 72%,#9b3030 73%);
+  box-shadow:inset 0 0 0 3px #a8492c,inset 0 4px #fff8a9,0 5px 0 #633044,0 9px 0 #06152b;
+}
+
+body[data-theme="fantasy"] .transport-button {
+  color:#07184d;
+  background:linear-gradient(to bottom,#d0fbff 0 12%,#58d8ed 13% 58%,#3282d4 59% 72%,#303d9e 73% 100%);
+  box-shadow:inset 0 0 0 3px #345bc0,inset 0 4px #efffff,0 5px 0 #29256f,0 9px 0 #050822;
+  text-shadow:2px 2px #9beeff;
+}
+body[data-theme="fantasy"] .transport-button.upload {
+  background:linear-gradient(to bottom,#dfc5ff 0 12%,#9a75ef 13% 58%,#6348c6 59% 72%,#3b287d 73%);
+}
+body[data-theme="fantasy"] .transport-button.primary {
+  color:#251050;
+  background:linear-gradient(to bottom,#fff6b5 0 12%,#9eefff 13% 40%,#8a87ff 41% 63%,#a84fc1 64% 76%,#492477 77%);
+  box-shadow:inset 0 0 0 3px #5f50bd,inset 0 4px #fffde1,0 5px 0 #30256f,0 9px 0 #050822;
+}
+
+body[data-theme="chrono"] .transport-button:hover,
+body[data-theme="fantasy"] .transport-button:hover {
+  transform:translateY(2px);
+  filter:brightness(1.1);
+  box-shadow:inset 0 0 0 3px currentColor,inset 0 4px rgba(255,255,255,.7),0 3px 0 #253064,0 6px 0 #050822;
+}
+body[data-theme="chrono"] .transport-button:active,
+body[data-theme="fantasy"] .transport-button:active {
+  transform:translateY(6px);
+  filter:brightness(.95);
+  box-shadow:inset 0 0 0 3px currentColor,inset 0 4px rgba(0,0,0,.16),0 1px 0 #050822;
+}
+
+/* Touch browsers can retain :hover after a tap. Keep an inactive loop button
+   visually released until the next time looping is explicitly enabled. */
+@media (hover:none), (pointer:coarse) {
+  body[data-theme="snes"] .loop-button:not(.loop-active):hover {
+    color:white;background:linear-gradient(#303873 0 48%,#22285c 49%);filter:none;transform:none;
+    box-shadow:inset 3px 3px 0 rgba(255,255,255,.14),4px 4px 0 #070713;
+  }
+  body[data-theme="real"] .loop-button:not(.loop-active):hover {
+    color:#eef0ef;background:linear-gradient(#4a4e50,#303335);filter:none;transform:none;
+    box-shadow:inset 0 1px rgba(255,255,255,.18),0 1px 2px rgba(0,0,0,.55);
+  }
+  body[data-theme="grove"] .loop-button:not(.loop-active):hover {
+    color:#fff0cc;background:linear-gradient(#765033,#4a2e1c);filter:none;transform:none;
+    box-shadow:inset 0 1px rgba(255,231,180,.22),0 1px 2px rgba(0,0,0,.55);
+  }
+  body[data-theme="chrono"] .loop-button:not(.loop-active):hover {
+    color:#062f38;background:linear-gradient(to bottom,#b9f56c 0 12%,#4bd396 13% 58%,#1b9a85 59% 72%,#12627a 73% 100%);filter:none;transform:none;
+    box-shadow:inset 0 0 0 3px #24786f,inset 0 4px #e7ff9d,0 5px 0 #234d67,0 9px 0 #06152b;
+  }
+  body[data-theme="fantasy"] .loop-button:not(.loop-active):hover {
+    color:#07184d;background:linear-gradient(to bottom,#d0fbff 0 12%,#58d8ed 13% 58%,#3282d4 59% 72%,#303d9e 73% 100%);filter:none;transform:none;
+    box-shadow:inset 0 0 0 3px #345bc0,inset 0 4px #efffff,0 5px 0 #29256f,0 9px 0 #050822;
+  }
+}

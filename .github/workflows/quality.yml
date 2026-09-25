@@ -1,0 +1,56 @@
+name: Validate Kbits Community
+
+on:
+  push:
+    branches: [main, "feature/**", "fix/**", "chore/**", "experiment/**", "integration/**"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  javascript:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check JavaScript syntax
+        run: |
+          node --check js/core/music-core.js
+          node --check js/core/library-core.js
+          node --check js/core/playback-core.js
+          node --check js/core/midi-validation-core.js
+          node --check js/platform/library-repositories.js
+          node --check js/platform/audio-engine.js
+          node --check js/platform/server-library-store.js
+          node --check js/features/player-controller.js
+          node --check js/features/transport-controller.js
+          node --check js/features/kalimba-controller.js
+          node --check js/features/theme-controller.js
+          node --check js/features/tuning-controller.js
+          node --check js/features/song-library-controller.js
+          node --check js/features/library-controller.js
+          node --check js/features/playlist-editor-controller.js
+          node --check js/features/browse-controller.js
+          node --check js/features/print-controller.js
+          node --check js/features/song-editor-controller.js
+          node --check js/features/navigation-controller.js
+          node --check js/features/settings-controller.js
+          node --check js/features/playfield-renderer.js
+          node --check js/midi-parser.js
+          node --check js/staff-view.js
+          node --check js/app.js
+          node --check server.js
+          node --check tests/browser/serve.js
+          node --check tests/browser/smoke.js
+      - name: Run unit tests
+        run: node --test tests/*.test.js
+
+  container:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build container without publishing
+        run: docker build --tag kbits-community:validation .
