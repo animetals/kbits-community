@@ -42,6 +42,67 @@ The sound selector offers the bundled Keylimba, FreePats, Moozica, and Vini bank
 
 The Music Staff view shows the song as scrolling notation. Tapping a staff note previews it; it does not seek playback. Its notation is a practice aid, not a full notation editor.
 
+## Player Setup
+
+Open the menu and choose **Setup**. Changes take effect immediately and are saved automatically in the current browser; there is no Save button. Another browser, device, or server address can have different settings, even when it uses the same song library. Clearing browser site data can remove these preferences.
+
+### Sound and volume
+
+| Control | What it does |
+| --- | --- |
+| **Open Sound & Tuning** | Opens the sound-bank selector, tuning presets, and individual tine adjustments described below. Use **Back to Setup** to return. |
+| **Tine Play Volume** | Sets the volume of notes you play manually, including tuning previews, from 0% to 100%. It does not change the song playback volume. |
+| **Song / Note Volume** | Sets the volume of MIDI playback from 0% to 100%. Lower it to hear your own playing more clearly while following a song. |
+
+### Play view and note appearance
+
+| Control | What it does |
+| --- | --- |
+| **Play View: Falling Blocks** | Shows upcoming notes moving down toward their matching tines. Play the note when it reaches the tine. |
+| **Play View: Music Staff** | Shows scrolling music notation moving toward a play line. Tapping a staff note previews its pitch without seeking or changing playback. |
+| **Note Preview** | Chooses how far ahead notes are shown, from **2 to 10 seconds**. A longer preview lets you see more of what is coming; a shorter preview focuses on the next few notes. This changes the visual preview, not the song's playback speed. |
+| **Falling Note Style: Color Block** | Displays notes as colored blocks. |
+| **Falling Note Style: Color Note** | Displays colored note names for the currently tuned pitches. |
+| **Falling Note Style: Color Number** | Displays colored numbered kalimba notation for the currently tuned pitches. |
+
+**Falling Note Style** is available only in Falling Blocks view and is hidden in Music Staff view. It changes the falling notes, independently of the labels on the tines.
+
+### Tine labels
+
+These checkboxes can be combined independently:
+
+| Control | What it does |
+| --- | --- |
+| **Number** | Shows numbered kalimba notation on each tine. Higher-octave notes use octave marks. |
+| **Note Name** | Shows the tuned note name, such as C or F♯, on each tine. Tine labels omit the octave number; Sound & Tuning shows the full pitch, such as C4. |
+| **Keyboard Key** | Shows the computer key assigned to a tine. The 34-key model has no computer-keyboard mapping, so this option does not add key assignments to that model. |
+| **Color Stickers** | Shows small color markers on the tines to help match them to the falling-note colors. Sticker colors follow the selected theme. |
+
+### Touch, MIDI playback, and tine size
+
+| Control | What it does |
+| --- | --- |
+| **Tine Swipe** | When enabled, sliding a finger across the tines plays each tine you pass over. When disabled, a touch plays only the first tine; lift your finger before playing another. This setting affects touch input; mouse dragging remains available. |
+| **Mute Notes Outside Layout** | Silences MIDI notes that do not exactly match a pitch in your selected model and tuning. When unchecked, those notes remain audible even though they are not drawn in either play view. It does not change or delete notes in the MIDI file. |
+| **Tine Size** | Scales the on-screen tines. Choose **60%, 75%, 90%, 100%, 110%, 125%, or 140%**; 100% is the standard size. Use smaller tines to fit the display or larger tines for easier touch input. This does not change pitches, the model's key count, or playback speed. |
+
+### Sound & Tuning
+
+Choose the instrument model from **Menu → Kalimba** before adjusting its tuning. Each model keeps its own tuning settings.
+
+| Control | What it does |
+| --- | --- |
+| **Sound** | Chooses the sample bank used for manual playing and MIDI playback: **Keylimba Samples**, **FreePats · Softened**, **Moozica Kalimba**, or **Vini · CC0 Real Kalimba**. Changing the bank changes the sound character, not the tuning. |
+| **C, C♯, B, D presets** | Applies a tuning to every tine relative to the model's standard C layout: C restores the standard pitches, C♯ raises them one semitone, B lowers them one semitone, and D raises them two semitones. A preset replaces individual adjustments for the active model. |
+| **Individual tine selector** | Adjusts one tine from **−12 to +12 semitones** relative to its standard pitch. Each choice shows the offset and resulting note. One semitone is one piano-key step, including black keys; 12 semitones is one octave. Changing a tine also previews its new pitch. |
+| **Hear** | Plays a preview of that tine and briefly highlights its position on the instrument. Use Tine Play Volume to adjust the preview level. |
+| **Reset Standard C** | Removes custom tuning offsets for the active model and restores its standard pitches. Other models retain their saved tuning. |
+| **Back to Setup** | Returns to Player Setup. Changes are already saved automatically. |
+
+Single-row models list tines from left to right. The 34-key model separates the upper bass/chromatic row from the lower diatonic row. Match each displayed pitch to your physical instrument; changing settings cannot retune a physical kalimba.
+
+Only exact matches between a MIDI pitch and the active tuning appear in the play view. Tuning changes that mapping; it does not transpose or rewrite the song. Use **Mute Notes Outside Layout** to choose whether unmatched notes remain audible.
+
 ## Print an arrangement
 
 Open Print from Song Details. Choose numbered notes, note names, or standard notation; select the print model, paper size (Letter or A4), and orientation. The print model uses its own saved tuning and can differ from the active player model.
